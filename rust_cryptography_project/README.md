@@ -1,5 +1,7 @@
 # Overview
 
+
+
 {Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
 
 {Provide a description of the software that you wrote to demonstrate the Rust language.}
@@ -12,21 +14,19 @@
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+This program was created using VS code and Cargo, a build system and package manager for Rust.
 
-{Describe the programming language that you used and any libraries.}
+This program was created using the Rust programming language and the standard input/output library.
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [Stack Over Flow](https://stackoverflow.com/)
+- [Rust Language](https://doc.rust-lang.org/stable/book/)
+- [YouTube - Lets Get Rusty](https://www.youtube.com/watch?v=OX9HJsJUDxA&list=PLai5B987bZ9CoVR-QEIN9foz4QCJ0H2Y8&index=1)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Fix the overflow error so that this program can handle large messages.
+- Using a better encryption algorithm that wold be more secure.
+- Make it so all the characters on the keyboard are usable. 
+- Make it so it could encrypt more than just inputted messages.
