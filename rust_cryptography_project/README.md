@@ -1,12 +1,8 @@
 # Overview
 
-This is a simple encryption and decryption program. It  
+This is a simple encryption and decryption program. It asks the user for a message and a key and uses the key to either encrypt or decrypt the message depending of the user's selection. The program takes the message and converts it to a number. It then xor's the key and the number to either encrypt or decrypt the message. For encryption it returns the encrypted message as a long number. In the decryption it then separates the numbers into groups of two and converts them back into letter and returns the decrypted message.
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
-
-{Provide a description of the software that you wrote to demonstrate the Rust language.}
-
-{Describe your purpose for writing this software.}
+I wrote this program to give me an introduction to the Rust Language. It allowed me to practice using variables both mutable and immutable, the different kind of loops, conditionals, and functions.
 
 {Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
 
