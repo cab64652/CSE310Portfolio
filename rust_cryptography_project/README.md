@@ -4,9 +4,7 @@ This is a simple encryption and decryption program. It asks the user for a messa
 
 I wrote this program to give me an introduction to the Rust Language. It allowed me to practice using variables both mutable and immutable, the different kind of loops, conditionals, and functions.
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/VB_mj99UZm8)
 
 # Development Environment
 
