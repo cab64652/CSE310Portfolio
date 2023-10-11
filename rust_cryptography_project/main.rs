@@ -87,10 +87,9 @@ fn encrypt(message: String, key: u128) {
 
 fn decrypt(message: String, key: u128) {
     
-    let mut ascii = String::new();
     
     /* Converts the message into an integer so it can be passed
-     to encode() so the messaged can be decrypted. */
+    to encode() so the messaged can be decrypted. */
     let int: u128 = message.trim().parse()
     .expect("Error, number not found");
 
@@ -100,9 +99,10 @@ fn decrypt(message: String, key: u128) {
     // Converts the integer from encode to a string so it can be iterated through.
     let code_str = code.to_string();
     print!("Your message is: ");
-    
+
     /* Iterates through the string of numbers so they 
     can be converted back into letters. */
+    let mut ascii = String::new();
     let mut counter = 0;
     for number in code_str.chars() {
 
