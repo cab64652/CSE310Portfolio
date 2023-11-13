@@ -30,7 +30,7 @@ def main():
 
         match choice:
             case 0:
-                return
+                break
 
             case 1:
                 add_lure(cursor)
@@ -47,10 +47,12 @@ def main():
                 delete_lure(cursor)
                 print_lures(cursor)
 
+            case 9:
+                print_lures(cursor)
+
             case _:
                 print("Invalid input\n")
         
-    # cursor.fetchone()
     connection.commit()
     connection.close()
 
@@ -74,7 +76,7 @@ def print_lures(cursor):
         cursor.execute(query, (row[0],))
 
         fish_row = cursor.fetchone()
-        print(f"Name: {row[1]}, Trout: {fish_row[1]}, Bass: {fish_row[2]}, Catfish: {fish_row[3]}, Muskie: {fish_row[4]}")
+        print(f"Name: {row[1]}, ID: {fish_row[0]} Trout: {fish_row[1]}, Bass: {fish_row[2]}, Catfish: {fish_row[3]}, Muskie: {fish_row[4]}")
     
 
 def is_int(num):
@@ -82,6 +84,7 @@ def is_int(num):
         return int(num)
     except:
         print("Invalid Input\n")
+        return False
 
 
 def add_lure(cursor):
@@ -89,24 +92,34 @@ def add_lure(cursor):
     name = input("Enter lure name: ").lower()
     color = input("Enter lure color: ").lower()
     lost = "no"
-    id = int(input("enter id: "))
+    id = is_int(input("enter id: "))
+    if id == False:
+        return
 
-    new_row = (id, name, color, lost)
+    new_row_lures = (id, name, color, lost)
+    new_row_fish = (id, 0, 0, 0, 0)
+
     
-    cursor.execute("INSERT INTO lures VALUES (?, ?, ?, ?)", new_row)
-    cursor.execute("INSERT INTO fish VALUES (0, 0, 0, 0)")
+    cursor.execute("INSERT INTO lures VALUES (?, ?, ?, ?)", new_row_lures)
+    cursor.execute("INSERT INTO fish VALUES (?, ?, ?, ?, ?)", new_row_fish)
 
 
 def delete_lure(cursor):
 
-    id = input("Enter the ID of the lure to be deleted: ")
+    id = is_int(input("Enter the ID of the lure to be deleted: "))
+    if id == False:
+        return
+    
     cursor.execute("DELETE FROM lures WHERE lure_id=?", id)
     cursor.execute("DELETE FROM fish WHERE lure_id=?", id)
 
 
 def find_lure(cursor):
 
-    search_id = input("Enter the lure ID to search for: ")
+    search_id = is_int(input("Enter the lure ID to search for: "))
+    if search_id == False:
+        return
+    
     query = """SELECT * from lures WHERE lure_id = ?"""
     cursor.execute(query, (search_id,))
 
@@ -116,7 +129,10 @@ def find_lure(cursor):
 
 def update_lure(cursor):
 
-    id = input("Enter the ID of the lure to update: ")
+    id = is_int(input("Enter the ID of the lure to update: "))
+    if id == False:
+        return
+    
     field = input("Enter the field of the lure to update: ")
 
     match field:
@@ -135,7 +151,7 @@ def update_lost(cursor, id):
     lost_value = input("Enter the new value: ").lower()
 
     update_values = (lost_value, id)
-    cursor.execute("UPDATE lures SET lost = ? WHERE lure_id=?", update_values)
+    cursor.execute("UPDATE lures SET lost = ? WHERE lure_id = ?", update_values)
 
 
 def display_menu_2():
@@ -149,11 +165,21 @@ def display_menu_2():
 
 def update_fish(cursor, id):
 
+    num_fish = is_int(input("Number of fish caught: "))
+    if num_fish == False:
+        return
+    
     display_menu_2()
-    fish = input("Enter the type of fish to update: ")
-    num_fish = input("Number of fish caught: ")
+    fish = is_int(input("Enter the type of fish to update: "))
+    if fish == False:
+        return
 
-    update_values = (num_fish, id)
+    cursor.execute("""SELECT * from fish WHERE lure_id = ?""", (id,))
+    row = cursor.fetchone()    
+
+    cur_num_fish = int(row[fish])
+    new_num_fish = cur_num_fish + num_fish
+    update_values = (new_num_fish, id)
 
     match fish:
         case 0:
@@ -172,7 +198,7 @@ def update_fish(cursor, id):
             cursor.execute("UPDATE fish SET muskie = ? WHERE lure_id = ?", update_values)
         
         case _:
-                print("Invalid input\n")
+                print("Invalid Selection\n")
 
 
 
