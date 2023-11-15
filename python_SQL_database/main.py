@@ -24,34 +24,36 @@ def main():
     cursor.execute(create_fish_table)
 
     choice = None
-    while not choice == 0:
+    while choice != 7:
+
         display_menu_1()
         choice = is_int(input("Selection: "))
 
         match choice:
-            case 0:
-                break
 
             case 1:
                 add_lure(cursor)
-                print_lures(cursor)
 
             case 2:
-                find_lure(cursor)
+                print_lures(cursor)
 
             case 3:
-                update_lure(cursor)
-                print_lures(cursor)
+                find_lure(cursor)
 
             case 4:
+                update_lure(cursor)
+
+            case 5:
                 delete_lure(cursor)
-                print_lures(cursor)
 
-            case 9:
-                print_lures(cursor)
+            case 6:
+                suggest_lure(connection)
 
+            case 7:
+                break
+            
             case _:
-                print("Invalid input\n")
+                print("Invalid Selection\n")
         
     connection.commit()
     connection.close()
@@ -59,25 +61,20 @@ def main():
 
 
 def display_menu_1():
-    print("0. Quit\n"
-          "1. Add Lure\n"
-          "2. Find Lure\n"
-          "3. Update Lure\n"
-          "4. Remove Lure\n"
-          "5. Suggest Lure")
+    print("\n1. Add Lure\n"
+          "2. Display All Lures\n"
+          "3. Find Lure\n"
+          "4. Update Lure\n"
+          "5. Remove Lure\n"
+          "6. Suggest Lure\n"
+          "7. Quit")
 
 
 def print_lures(cursor):
 
-    for row in cursor.execute("SELECT * FROM lures"):
+    for row in cursor.execute("\nSELECT * FROM lures"):
         print(f"ID: {row[0]}, Name: {row[1]}, Color: {row[2]}, Lost: {row[3]}")
 
-        query = """SELECT * from fish WHERE lure_id = ?"""
-        cursor.execute(query, (row[0],))
-
-        fish_row = cursor.fetchone()
-        print(f"Name: {row[1]}, ID: {fish_row[0]} Trout: {fish_row[1]}, Bass: {fish_row[2]}, Catfish: {fish_row[3]}, Muskie: {fish_row[4]}")
-    
 
 def is_int(num):
     try:
@@ -110,8 +107,8 @@ def delete_lure(cursor):
     if id == False:
         return
     
-    cursor.execute("DELETE FROM lures WHERE lure_id=?", id)
-    cursor.execute("DELETE FROM fish WHERE lure_id=?", id)
+    cursor.execute("DELETE FROM lures WHERE lure_id = ?", (id,))
+    cursor.execute("DELETE FROM fish WHERE lure_id = ?", (id,))
 
 
 def find_lure(cursor):
@@ -120,11 +117,20 @@ def find_lure(cursor):
     if search_id == False:
         return
     
-    query = """SELECT * from lures WHERE lure_id = ?"""
-    cursor.execute(query, (search_id,))
+    try:
+        cursor.execute("""SELECT * from lures WHERE lure_id = ?""", (search_id,))
+        row = cursor.fetchone()
 
-    row = cursor.fetchone()
-    print(f"Name: {row[1]}, Color: {row[2]}, Lost: {row[3]}")    
+        print(f"\nName: {row[1]}, Color: {row[2]}, Lost: {row[3]}")    
+
+        cursor.execute("""SELECT * from fish WHERE lure_id = ?""", (row[0],))
+        fish_row = cursor.fetchone()
+
+        print("Fish Caught:")
+        print(f"Trout: {fish_row[1]}, \nBass: {fish_row[2]}, \nCatfish: {fish_row[3]}, \nMuskie: {fish_row[4]}")
+
+    except:
+        print("ID Not Found")
 
 
 def update_lure(cursor):
@@ -156,7 +162,7 @@ def update_lost(cursor, id):
 
 def display_menu_2():
 
-    print("0. Back\n"
+    print("\n0. Back\n"
           "1. Trout\n"
           "2. Bass\n"
           "3. Catfish\n"
@@ -200,6 +206,43 @@ def update_fish(cursor, id):
         case _:
                 print("Invalid Selection\n")
 
+
+def suggest_lure(connection):
+
+    display_menu_2()
+
+    fish = is_int(input("Enter the target fish: "))
+    if fish == False:
+        return
+
+    max = -1
+    # max_id = -1
+    suggested_lure = None
+    # for row in cursor.execute("SELECT * FROM fish"):
+    #     if int(row[fish]) > max:
+    #         max = int(row[fish])
+    #         max_id = int(row[0])
+
+    cursor1 = connection.cursor()
+    cursor2 = connection.cursor()
+
+    cursor1.execute('SELECT * FROM lures')
+    cursor2.execute('SELECT * FROM fish')
+
+    for row1, row2 in zip(cursor1, cursor2):
+        if int(row2[fish]) > max and row1[3] == "no":
+            max = int(row2[fish])
+            # max_id = int(row2[0])
+            suggested_lure = row1 + tuple([max])
+
+    # print(suggested_lure)
+
+
+    # cursor.execute("""SELECT * from lures WHERE lure_id = ?""", (max_id,))
+    # suggested_lure = cursor.fetchone() 
+
+    print("\nSuggested Lure") 
+    print(f"Name: {suggested_lure[1]} \nColor: {suggested_lure[2]} \nNumber of target fish caught: {suggested_lure[4]}")   
 
 
 
