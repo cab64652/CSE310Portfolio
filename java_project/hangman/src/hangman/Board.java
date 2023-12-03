@@ -6,7 +6,7 @@ public class Board {
 	public int strikes;
 	
 	
-	void initialize_board() {
+	void initializeBoard() {
 		gameBoard = ("     ____\n"
 				+ "    |    |\n"
 				+ "    |    |\n"
@@ -20,18 +20,19 @@ public class Board {
 	}
 	
 	
-	void display_board() {
+	void displayBoard() {
 		System.out.println(gameBoard);
 	}
 	
 	
-	void update_strikes() {
+	void updateStrikes() {
 		strikes ++;
 	}
 	
 	
-	void update_board(char letter) {
-		update_strikes();
+	void updateBoard(char letter) {
+		updateStrikes();
+		char[] tempGameBoard;
 
 		switch (strikes)
 		{
@@ -39,44 +40,52 @@ public class Board {
 			break;
 
 		case 1:
-			gameBoard = gameBoard.substring(0, 25) + '0' + gameBoard.substring(26, 93) + letter + gameBoard.substring(94);
-//			gameBoard[93] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[25] = '0';
+			tempGameBoard[93] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 2:
-			gameBoard = gameBoard.substring(0, 36) + '|' + gameBoard.substring(37, 94) + letter + gameBoard.substring(95);
-//			gameBoard[36] = '|';
-//			gameBoard[94] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[36] = '|';
+			tempGameBoard[94] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 3:
-			gameBoard = gameBoard.substring(0, 35) + '\\' + gameBoard.substring(36, 95) + letter + gameBoard.substring(96);
-//			gameBoard[35] = char(92);
-//			gameBoard[95] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[35] = '\\';
+			tempGameBoard[95] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 4:
-			gameBoard = gameBoard.substring(0, 37) + '/' + gameBoard.substring(38, 96) + letter + gameBoard.substring(97);
-//			gameBoard[37] = '/';
-//			gameBoard[96] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[37] = '/';
+			tempGameBoard[96] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 5:
-			gameBoard = gameBoard.substring(0, 47) + '|' + gameBoard.substring(48, 97) + letter + gameBoard.substring(98);
-//			gameBoard[47] = '|';
-//			gameBoard[97] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[47] = '|';
+			tempGameBoard[97] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 6:
-			gameBoard = gameBoard.substring(0, 57) + '/' + gameBoard.substring(58, 98) + letter + gameBoard.substring(99);
-//			gameBoard[57] = '/';
-//			gameBoard[98] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[57] = '/';
+			tempGameBoard[98] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 7:
-			gameBoard = gameBoard.substring(0, 59) + '/' + gameBoard.substring(60, 99) + letter + gameBoard.substring(100);
-//			gameBoard[59] = char(92);
-//			gameBoard[99] = letter;
+			tempGameBoard = gameBoard.toCharArray();
+			tempGameBoard[59] = '\\';
+			tempGameBoard[99] = letter;
+			gameBoard = new String(tempGameBoard);
 			break;
 
 		case 8:
@@ -88,7 +97,7 @@ public class Board {
 	}
 	
 	
-	int get_strikes() {
+	int getStrikes() {
 		return strikes;
 	}
 }

@@ -2,31 +2,33 @@ package hangman;
 
 public class Game {
 	
-	public String hiddenWord;
-	public String hint;
+	public Word word = new Word();
+	String hiddenWord;
+	public String hint = "-";
 	Board board = new Board();
 	
-	void get_hidden_word() {
-		hiddenWord = "bananas";
+	void getHiddenWord(String difficulty) {
+		word.getHiddenWord(difficulty);
+		hiddenWord = word.hiddenWord;
 	}
 	
-	void get_hint() {
-		int hint_len = hiddenWord.length();
+	void getHint() {
+		int hintLen = hiddenWord.length();
 
 
-		for (int i = 0; i < hint_len; i++)
+		for (int i = 0; i < hintLen - 1; i++)
 		{
 			hint += "-";
 		}
 	}
 	
 	
-	void update_hint(char letter) {
+	void updateHint(char letter) {
 		
 		int i = 0;
-		for (char hidden_letter : hiddenWord.toCharArray())
+		for (char hiddenLetter : hiddenWord.toCharArray())
 		{
-			if (hidden_letter == letter)
+			if (hiddenLetter == letter)
 			{
 				char[] hintChars = hint.toCharArray();
 				hintChars[i] = letter;
@@ -37,31 +39,31 @@ public class Game {
 	}
 	
 	
-	void initialize_game() {
+	void initializeGame(String difficulty) {
 		
-		get_hidden_word();
-		get_hint();
-		board.initialize_board();
+		getHiddenWord(difficulty);
+		getHint();
+		board.initializeBoard();
 		
 	}
 	
 	
-	void display() {
+	void displayGame() {
 		
-		board.display_board();
-		System.out.println("\n" + hint);
+		board.displayBoard();
+		System.out.println(hint);
 	}
 	
 	
-	void add_strike(char letter) {
+	void addStrike(char letter) {
 		
-		board.update_board(letter);
+		board.updateBoard(letter);
 	}
 	
 	
-	boolean game_over() {
+	boolean gameOver() {
 		
-		if (board.get_strikes() == 8 || hiddenWord == hint)
+		if (board.getStrikes() == 8 || hiddenWord.equals(hint))
 		{
 			return true;
 		}
@@ -70,16 +72,16 @@ public class Game {
 	}
 	
 	
-	void update_game_board(char letter) {
-		board.update_board(letter);
+	void updateGameBoard(char letter) {
+		board.updateBoard(letter);
 	}
 	
 	
-	boolean check_letter(char letter) {
+	boolean checkLetter(char letter) {
 		
-		for (char hidden_letter : hiddenWord.toCharArray())
+		for (char hiddenLetter : hiddenWord.toCharArray())
 		{
-			if(hidden_letter == letter)
+			if(hiddenLetter == letter)
 			{
 				return true;
 			}
@@ -89,16 +91,18 @@ public class Game {
 	}
 	
 	
-	void game_won() {
+	void gameWon() {
 		
-		if (game_over())
+		if (gameOver())
 		{
-			if (hiddenWord == hint){
+			System.out.println(hiddenWord);
+			
+			if (hiddenWord.equals(hint))
+			{
 				System.out.println("You won!");
 			}
 			else
 			{
-				System.out.println(hiddenWord);
 				System.out.println("Game Over!");
 			}
 		}

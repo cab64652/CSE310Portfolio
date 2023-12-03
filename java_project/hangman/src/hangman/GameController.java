@@ -5,42 +5,43 @@ import java.util.Scanner;
 
 public class GameController {
 
+	private static Scanner scanner = new Scanner(System.in);
+
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		Integer choice;
 		
 		do {
-			
-			do {
+
+			try {
 				displayMenu();
-				String input = scanner.nextLine();
-				choice = isInt(input);
-			} while (choice == null);
+				choice = scanner.nextInt();
+			}
+			catch (Exception e) {
+				choice = -1;
+				scanner.nextLine(); 
+			}
 		
 			switch (choice) {
 			case 0:
 				break;
 				
 			case 1:
-				playGame("Easy");
+				playGame("easy");
 				break;
 				
 			case 2:
-				playGame("Medium");
+				playGame("med");
 				break;
 				
 			case 3:
-				playGame("Hard");
+				playGame("hard");
 				break;
-				
-//			case null:
-//				System.out.println("Invalid Input");
-//				break;
 				
 			default:
-				System.out.println("Invalid Input");
+				System.out.println("Invalid Input!");
 				break;
 			}	
+			
 		} while (choice != 0);
 		scanner.close();
 		
@@ -58,48 +59,30 @@ public class GameController {
 	
 	private static void playGame(String difficulty) {
 		Game game = new Game();
-		game.initialize_game();
-		game.display();
-		Scanner scanner = new Scanner(System.in);
-
-		while (!game.game_over())
+		game.initializeGame(difficulty);
+		
+		do
 		{
+			game.displayGame();
 			System.out.println("Enter a letter: ");
 
 			try{
 				char letter = scanner.next().charAt(0);
 
-				if (game.check_letter(letter))
+				if (game.checkLetter(letter))
 				{
-					game.update_hint(letter);
+					game.updateHint(letter);
 				}
 				else
 				{
-					game.update_game_board(letter);
+					game.updateGameBoard(letter);
 				}
-				game.display();
-				game.game_won();
+				
+				game.gameWon();
 			}
 			catch (Exception e) {
 					System.out.println("Invalid Input!");
 			}
-		}
-		
-		scanner.close();
+		} while (!game.gameOver());
 	}
-	
-	
-	private static Integer isInt(String str) {
-		
-		try {
-			
-			return Integer.parseInt(str);
-			
-		} catch (Exception e){
-			
-			System.out.println("Invalid Input");
-			return null;
-		}
-	}
-
 }
