@@ -1,5 +1,6 @@
 import sqlite3
 
+# Created for easier reference to items in the database.
 fish_list = ["place holder", "trout", "bass", "catfish", "muskie"]
 water_list = ["place holder", "clear", "stained", "muddy"]
 
