@@ -50,8 +50,7 @@ def main():
                 connection.commit()
 
             case 2:
-                # print_lures(cursor)
-                print_lures(connection)
+                print_lures(cursor)
 
             case 3:
                 search_id = get_int("Enter the lure ID to search for: ")
@@ -88,26 +87,11 @@ def get_main_menu():
             "Selection: ")
 
 
-# # Displays each lure in the database. 
-# def print_lures(cursor):
+# Displays each lure in the database. 
+def print_lures(cursor):
 
-#     for row in cursor.execute("\nSELECT * FROM lures"):
-#         print(f"ID: {row[0]}, Name: {row[1]}, Color: {row[2]}, Lost: {row[3]}")
-
-def print_lures(connection):
-
-    cursor1 = connection.cursor()
-    cursor2 = connection.cursor()
-    cursor3 = connection.cursor()
-
-    cursor1.execute('SELECT * FROM lures')
-    cursor2.execute('SELECT * FROM fish')
-    cursor3.execute('SELECT * FROM water')
-
-    for row1, row2, row3 in zip(cursor1, cursor2, cursor3):
-        print(f"ID: {row1[0]}, Name: {row1[1]}, Color: {row1[2]}, Lost: {row1[3]}")
-        print(row2)
-        print(f"{row3}\n")
+    for row in cursor.execute("\nSELECT * FROM lures"):
+        print(f"ID: {row[0]}, Name: {row[1]}, Color: {row[2]}, Lost: {row[3]}")
 
 
 # Displays all the information of a single lure including the number 
