@@ -5,7 +5,7 @@ This program stores information about different fishing lures. It stores the nam
 The purpose of writing this program was for me to learn how to use SQL databases in python. 
 
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/XGwyf5e47Ek)
 
 # Relational Database
 
