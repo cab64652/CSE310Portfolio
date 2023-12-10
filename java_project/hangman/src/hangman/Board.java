@@ -30,7 +30,7 @@ public class Board {
 	// Adds a strike when called.
 	void updateStrikes() {
 		
-		strikes ++;
+		strikes++;
 	}
 	
 	

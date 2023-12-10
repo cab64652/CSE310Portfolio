@@ -6,7 +6,7 @@ This program is a hang man game that is played from the terminal. It takes a let
 
 The purpose for me writing this program was to get an introduction to the Java programming language and learn the basic syntax of Java.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/djEm8smfY38)
 
 # Development Environment
 

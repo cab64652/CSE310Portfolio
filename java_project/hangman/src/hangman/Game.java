@@ -6,8 +6,8 @@ package hangman;
 public class Game {
 	
 	public Word word = new Word();
+	public Board board = new Board();
 	public String hint = "-";
-	Board board = new Board();
 	
 	// Sets the hidden word in the word object.
 	void getHiddenWord(String difficulty) {
