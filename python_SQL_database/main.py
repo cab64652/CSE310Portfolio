@@ -121,7 +121,7 @@ def print_lure_info(lure_row, cursor):
         # Uses the global water list to access the name of each type of water and 
         # uses the index to get the corresponding information from the database.
         for i in range(1, len(water_list)):
-            print(f"{water_row[i]} caught in {water_list[i]} water.")  
+            print(f"{water_row[i]} fish caught in {water_list[i]} water.")  
 
 
     else:
