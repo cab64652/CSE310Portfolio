@@ -4,7 +4,7 @@ The object of this game this game is earn as many points as possible by collecti
 
 My purpose for writing this software was gain more practice programming in C# and to learn how to use the Unity Game Engine.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/kh1RIBsmpBw)
 
 # Development Environment
 
