@@ -154,6 +154,10 @@ def add_lure(cursor):
     if color == '0':
         return
 
+    # Gets the last lure ID from the database.
+    cursor.execute('SELECT * FROM lures ORDER BY ROWID DESC LIMIT 1')    
+    last = cursor.fetchone()
+
     # Sets the ID to 1 if there is no information in 
     # the table or sets the ID to the last ID plus one.
     if last:
@@ -166,10 +170,6 @@ def add_lure(cursor):
     new_row_lures = (id, name, color, lost)
     new_row_fish = (id, 0, 0, 0, 0)
     new_row_water = (id, 0, 0, 0)
-
-    # Gets the last lure ID from the database.
-    cursor.execute('SELECT * FROM lures ORDER BY ROWID DESC LIMIT 1')    
-    last = cursor.fetchone()
 
     # Adds the new lure and the default information to the corresponding tables.
     cursor.execute("INSERT INTO lures VALUES (?, ?, ?, ?)", new_row_lures)
