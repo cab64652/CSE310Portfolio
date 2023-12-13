@@ -4,8 +4,8 @@ This app is a flash card app. The plan was to make so that users could input the
 
 I created this project to gain more practice with Java and to learn Android Studio. 
 
-[Software Demo Video](http://youtube.link.goes.here)
-
+[Software Demo Video](https://youtu.be/GJvY8FGrxNw)
+.goes.her
 # Development Environment
 
 This app was created using Android Studio and the Java language.
@@ -18,7 +18,6 @@ This app was created using Android Studio and the Java language.
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
 * Fix bug in app.
 * Allow users to create there own flash cards.
 * Store those flash cards in phone storage.
