@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FlashCards"
+rootProject.name = "flash_cards"
 include(":app")
