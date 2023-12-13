@@ -5,7 +5,7 @@ This app is a flash card app. The plan was to make so that users could input the
 I created this project to gain more practice with Java and to learn Android Studio. 
 
 [Software Demo Video](https://youtu.be/GJvY8FGrxNw)
-.goes.her
+
 # Development Environment
 
 This app was created using Android Studio and the Java language.
