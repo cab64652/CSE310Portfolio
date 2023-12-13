@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Sets up the toggle button to with the question and answer.
         toggleQA = findViewById(R.id.toggle_QA);
-        toggleQA.setTextOn(answerCards[index]);
-        toggleQA.setTextOff(questionCards[index]);
+        toggleQA.setTextOn("Answer");
+        toggleQA.setTextOff("Question");
         toggleQA.setChecked(true);
 
         // Sets up the next button to cycle to the next flashcard.
